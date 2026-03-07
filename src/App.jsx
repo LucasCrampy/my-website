@@ -9,7 +9,7 @@ const SITE_CONTENT = {
   hero: {
     name: "LUCAS CRAMPTON",
     major: "APPLIED MATH",
-    tagline: '"Building a digital footprint from a clean slate."',
+    tagline: '"A student at Olympic College."',
     profileImage: "Wave.gif"
   },
   contact: {
@@ -20,7 +20,7 @@ const SITE_CONTENT = {
     {
       date: "Est. 2027",
       school: "Bachelor's Transfer",
-      description: "I plan on transferring into an Applied Math Bachelor's program to deepen my technical expertise and connect with the broader scientific community.",
+      description: "I plan on transferring into an Bachelor's program in Mathmatics or Applied Mathematics.",
       bgClass: "bg-white dark:bg-slate-800",
       textAccentClass: "text-blue-600 dark:text-blue-400",
       shadowColor: "rgba(59,130,246,1)", 
@@ -30,7 +30,7 @@ const SITE_CONTENT = {
     {
       date: "Jan 2025 - Present",
       school: "Olympic College",
-      description: "Currently pursuing Applied Mathematics. Maintaining a 3.75 GPA and focused on building a strong foundation in STEM.",
+      description: "Currently on track to complete my Associate's degree. Focusing on challenging myself, pursuing my academic interests and learning new things.",
       bgClass: "bg-blue-100 dark:bg-slate-800",
       textAccentClass: "text-blue-700 dark:text-blue-400",
       shadowColor: "rgba(0,0,0,1)", 
@@ -40,7 +40,7 @@ const SITE_CONTENT = {
     {
       date: "Summer 2023",
       school: "Eagle Harbor High School",
-      description: "Graduation. This was the starting point of my journey toward self-discipline and finding my passion for academic logic.",
+      description: "Graduated.",
       bgClass: "bg-white dark:bg-slate-800",
       textAccentClass: "text-slate-500 dark:text-slate-400",
       shadowColor: "rgba(0,0,0,1)", 
@@ -51,8 +51,8 @@ const SITE_CONTENT = {
   experience: [
     { role: "Freelance IT", year: "2025" },
     { role: "Carpentry Apprentice", year: "2025" },
-    { role: "Mouse Magic", year: "2024" },
-    { role: "Docs Grill", year: "2023" }
+    { role: "Mouse Magic Toys", year: "2024" },
+    { role: "Docs Marina Grill", year: "2023" }
   ]
 };
 
@@ -80,7 +80,7 @@ export default function App() {
       icon: <Calculator size={32}/>, 
       title: "Mathematics", 
       color: "bg-red-200 dark:bg-slate-800",
-      summary: "Exploring applied math concepts and visualizing complex systems.",
+      summary: "These are a few of the projects I've worked on in class. I will update this section with more projects as I complete them.",
       modalContent: (
         <div className="space-y-12 max-w-5xl mx-auto">
           <div>
@@ -124,7 +124,7 @@ export default function App() {
       icon: <Code size={32}/>, 
       title: "Computers", 
       color: "bg-emerald-200 dark:bg-slate-800",
-      summary: "Building logical frameworks, software, and freelance IT solutions.",
+      summary: "Learning how to build software as well as use it.",
       modalContent: (
         <div className="space-y-12 max-w-5xl mx-auto">
           <div>
@@ -163,7 +163,7 @@ export default function App() {
       icon: <Camera size={32}/>, 
       title: "Photography", 
       color: "bg-purple-200 dark:bg-slate-800",
-      summary: "Viewing the world through creative lenses and geometry.",
+      summary: "A hobby I have had for a long time.",
       modalContent: (
         <div className="space-y-10 max-w-6xl mx-auto">
           <div>
@@ -192,7 +192,7 @@ export default function App() {
       icon: <BookOpen size={32}/>, 
       title: "Science", 
       color: "bg-blue-200 dark:bg-slate-800",
-      summary: "Connecting mathematical theory to environmentalism and the physical world.",
+      summary: "I have always been fascinated by the natural sciences. Recently I have been trying to find ways to combine this interest with the skills I am learning in school.",
       modalContent: (
         <div className="space-y-8 max-w-5xl mx-auto">
           <div>
