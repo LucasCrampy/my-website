@@ -18,7 +18,7 @@ const SITE_CONTENT = {
   },
   education: [
     {
-      date: "Est. 2027",
+      date: "Est. late 2026 - early 2027",
       school: "Bachelor's Transfer",
       description: "I plan on transferring into an Bachelor's program in Mathmatics or Applied Mathematics.",
       bgClass: "bg-white dark:bg-slate-800",
