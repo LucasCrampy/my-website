@@ -1,19 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --font-handwritten: "Permanent Marker";
+  /* Using Archivo Black for that heavy, blocky feel */
+  --font-blocky: "Archivo Black", sans-serif;
 }
 
-/* Custom Jagged Border using a Clip-Path for that sketchbook look */
-.jagged-border {
-}
-
-/* Arched text container settings */
+/* Arched Name Layout - Adjusted for the blocky font */
 .arch-container {
   position: absolute;
-  width: 350px;
-  height: 350px;
-  top: -60px;
+  width: 450px; 
+  height: 450px;
+  top: -120px; /* Moves the whole arch up/down relative to the GIF */
   left: 50%;
   transform: translateX(-50%);
 }
@@ -21,9 +18,38 @@
 .arch-text span {
   position: absolute;
   left: 50%;
-  transform-origin: 0 175px; /* Half of height to create the pivot point */
-  font-family: var(--font-handwritten);
-  font-size: 1.8rem;
-  font-weight: bold;
+  transform-origin: 0 225px; /* Pivot point at the center of the 450px box */
+  font-family: var(--font-blocky);
+  font-size: 2.2rem; /* Big and blocky */
+  font-weight: 900;
+  text-transform: uppercase;
   white-space: nowrap;
+  letter-spacing: -0.02em;
+  color: #0f172a; /* Light mode: deep slate */
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+/* Moonlight dark mode for the arched text */
+.dark .arch-text span {
+  color: #e2e8f0; /* Pale, cool slate (moonlight) */
+  text-shadow: 0 0 12px rgba(226, 232, 240, 0.25); /* Subtle cool glow */
+}
+
+/* Custom scrollbar for the modal windows */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1; /* Tailwind slate-300 */
+  border-radius: 4px;
+}
+
+/* Dark mode scrollbar - deep moonlight tone */
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #334155; /* Tailwind slate-700 */
 }
