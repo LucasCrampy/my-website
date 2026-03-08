@@ -20,7 +20,7 @@ const SITE_CONTENT = {
     title: "Who I Am",
     image: "https://placehold.co/600x600/e2e8f0/64748b?text=Your+Photo",
     text: "I'm a student at Olympic College passionate about applied mathematics and software development. When I'm not studying or coding, I enjoy photography and advocating for accessibility and environmental sustainability.",
-    linkedin: "https://linkedin.com/in/your-profile",
+    linkedin: "https://www.linkedin.com/in/lucas-crampton-0b9917306/",
     github: "https://github.com/LucasCrampy",
     sisterText: "My sister is a data science student at Northeastern and does some cool stuff. Check out her work:",
     sisterLinkedin: "https://linkedin.com/in/her-profile",
