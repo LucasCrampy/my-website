@@ -25,3 +25,63 @@
   background-color: #cbd5e1; /* Tailwind slate-300 */
   border: 2px solid #0f172a;
 }
+
+/* Modal animations - moved from inline style for single parse */
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes modalPopUp {
+  from { opacity: 0; transform: scale(0.95) translateY(15px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.animate-fade-in {
+  animation: modalFadeIn 0.3s ease-out forwards;
+}
+.animate-pop-up {
+  animation: modalPopUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Scroll-in reveal for section headers */
+.reveal-on-scroll {
+  opacity: 0;
+  translate: 0 8px;
+  transition: opacity 500ms ease-out, translate 500ms ease-out;
+}
+.reveal-on-scroll--visible {
+  opacity: 1;
+  translate: 0 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll {
+    opacity: 1;
+    translate: none;
+    transition: none;
+  }
+}
+
+/* Hero arch window – visible pattern for parallax depth */
+.hero-arch-pattern {
+  background-color: transparent;
+  background-image:
+    repeating-linear-gradient(
+      135deg,
+      rgba(37, 99, 235, 0.18),
+      rgba(37, 99, 235, 0.18) 6px,
+      transparent 6px,
+      transparent 16px
+    );
+}
+.dark .hero-arch-pattern {
+  background-color: transparent;
+  background-image:
+    repeating-linear-gradient(
+      135deg,
+      rgba(191, 219, 254, 0.3),
+      rgba(191, 219, 254, 0.3) 6px,
+      transparent 6px,
+      transparent 16px
+    );
+}
+
+/* (icon wobble animation removed by design) */
