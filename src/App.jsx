@@ -10,7 +10,8 @@ const data = {
     hero: {
       name: "LUCAS CRAMPTON",
       major: "APPLIED MATH",
-      tagline: '"A student figuring things out, one problem at a time"',
+     // tagline: '"A student figuring things out, one problem at a time"',
+      tagline: '"A student just happy to be here."',
       profileImage: "Wave.gif"
     },
     contact: {
