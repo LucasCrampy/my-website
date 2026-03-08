@@ -1,43 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-  /* Using Archivo Black for that heavy, blocky feel */
-  --font-blocky: "Archivo Black", sans-serif;
+  /* Bringing back the heavy, blocky feel for headings */
+  --font-blocky: "Archivo Black", ui-sans-serif, system-ui, sans-serif;
 }
 
-/* Arched Name Layout - Adjusted for the blocky font */
-.arch-container {
-  position: absolute;
-  width: 450px; 
-  height: 450px;
-  top: -120px; /* Moves the whole arch up/down relative to the GIF */
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.arch-text span {
-  position: absolute;
-  left: 50%;
-  transform-origin: 0 225px; /* Pivot point at the center of the 450px box */
-  font-family: var(--font-blocky);
-  font-size: 2.2rem; /* Big and blocky */
-  font-weight: 900;
-  text-transform: uppercase;
-  white-space: nowrap;
-  letter-spacing: -0.02em;
-  color: #0f172a; /* Light mode: deep slate */
-  transition: color 0.3s ease, text-shadow 0.3s ease;
-}
-
-/* Moonlight dark mode for the arched text */
-.dark .arch-text span {
-  color: #e2e8f0; /* Pale, cool slate (moonlight) */
-  text-shadow: 0 0 12px rgba(226, 232, 240, 0.25); /* Subtle cool glow */
-}
-
-/* Custom scrollbar for the modal windows */
+/* Custom scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
@@ -45,11 +15,13 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #cbd5e1; /* Tailwind slate-300 */
-  border-radius: 4px;
+  background-color: #0f172a; /* Tailwind slate-900 */
+  border-radius: 9999px; /* Pill shape for the scrollbar */
+  border: 2px solid #fffdf5; /* Matches background */
 }
 
-/* Dark mode scrollbar - deep moonlight tone */
+/* Dark mode scrollbar */
 .dark .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #334155; /* Tailwind slate-700 */
+  background-color: #cbd5e1; /* Tailwind slate-300 */
+  border: 2px solid #0f172a;
 }
