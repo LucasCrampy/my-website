@@ -127,7 +127,7 @@ const data = {
       color: "bg-purple-200 dark:bg-slate-800",
       headerTitle: "Photo Gallery",
       headerSubtitle: "Applying concepts of geometry, light, and composition outside of an academic setting.",
-      images: Array.from({ length: 28 }, (_, i) => `WEBIMG${i + 1}.jpg`)
+      images: Array.from({ length: 31 }, (_, i) => `WEBIMG${i + 1}.jpg`)
     },
     science: {
       id: "science",
