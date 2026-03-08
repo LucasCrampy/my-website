@@ -10,7 +10,7 @@ const data = {
     hero: {
       name: "LUCAS CRAMPTON",
       major: "APPLIED MATH",
-      tagline: '"A student at Olympic College."',
+      tagline: '"A student figuring things out, one problem at a time"',
       profileImage: "Wave.gif"
     },
     contact: {
@@ -83,7 +83,7 @@ const data = {
       icon: "calculator",
       title: "Mathematics",
       color: "bg-red-200 dark:bg-slate-800",
-      headerTitle: "Applied Math Projects",
+      headerTitle: "Math Projects",
       headerSubtitle: "Solving hard problems with math is one of my favorite things. These are some examples of projects I have done for school.",
       projects: [
         {
@@ -232,17 +232,18 @@ const RevealOnScroll = ({ children, delay = 0 }) => {
 
 // ==========================================
 // INTERACTIVE CARD COMPONENT ("Photo Stack" Effect)
+// Changed div to button for keyboard accessibility
 // ==========================================
 const ProjectCard = ({ children, onClick, className = "" }) => (
-  <div
+  <button
     onClick={onClick}
-    className={`group relative z-0 hover:z-10 cursor-pointer border-4 border-black dark:border-slate-600 bg-white dark:bg-slate-800 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(2,6,23,1)] transform transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:-rotate-1 hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[12px_12px_0px_0px_rgba(2,6,23,1)] outline outline-1 outline-transparent ${className}`}
+    className={`group relative z-0 hover:z-10 cursor-pointer border-4 border-black dark:border-slate-600 bg-white dark:bg-slate-800 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(2,6,23,1)] transform transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:-rotate-1 hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[12px_12px_0px_0px_rgba(2,6,23,1)] outline outline-1 outline-transparent w-full text-left focus:outline-none focus:ring-4 focus:ring-yellow-400 ${className}`}
   >
     {children}
-    <div className="absolute top-4 right-4 opacity-0 transition-opacity duration-500 group-hover:delay-1000 group-hover:opacity-100 text-slate-400 dark:text-slate-500 hidden sm:block">
+    <div className="absolute top-4 right-4 opacity-0 transition-opacity duration-500 group-hover:delay-1000 group-hover:opacity-100 text-slate-400 dark:text-slate-500 hidden sm:block" aria-hidden="true">
        <ArrowUpRight size={28} strokeWidth={2} />
     </div>
-  </div>
+  </button>
 );
 
 
@@ -279,15 +280,20 @@ export default function App() {
   const galleryContent = (
     <div className="columns-1 sm:columns-2 md:columns-3 gap-6 space-y-6">
       {PROJECT_CONTENT.photography.images.map((src, idx) => (
-        <div key={idx} className="break-inside-avoid">
+        <button 
+          key={idx} 
+          onClick={() => setLightboxImage(src)}
+          className="break-inside-avoid w-full block focus:outline-none focus:ring-4 focus:ring-yellow-400 rounded-sm"
+          aria-label={`Open gallery image ${idx + 1}`}
+        >
           <img 
             src={src} 
-            alt={`Gallery image ${idx + 1}`} 
+            alt={`Gallery view ${idx + 1}`} 
             loading="lazy"
-            onClick={() => setLightboxImage(src)}
+            decoding="async"
             className="w-full h-auto border-4 border-black dark:border-slate-600 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(2,6,23,1)] hover:-translate-y-1 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[8px_8px_0px_0px_rgba(2,6,23,1)] transition-all cursor-zoom-in bg-slate-200 dark:bg-slate-900"
           />
-        </div>
+        </button>
       ))}
     </div>
   );
@@ -320,7 +326,8 @@ export default function App() {
         >
           <button 
             onClick={() => setLightboxImage(null)}
-            className="absolute top-6 right-6 text-white hover:text-yellow-400 transition-colors p-2"
+            className="absolute top-6 right-6 text-white hover:text-yellow-400 transition-colors p-2 focus:outline-none focus:ring-2 focus:ring-yellow-400 rounded-full"
+            aria-label="Close fullscreen image"
           >
             <X size={48} strokeWidth={2} />
           </button>
@@ -352,7 +359,8 @@ export default function App() {
               </div>
               <button 
                 onClick={() => setActiveProject(null)}
-                className="bg-black dark:bg-slate-700 text-white dark:text-slate-200 hover:bg-yellow-400 dark:hover:bg-slate-600 hover:text-black dark:hover:text-white transition-colors border-4 border-black dark:border-slate-600 p-1.5 shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] dark:shadow-[4px_4px_0px_0px_rgba(2,6,23,1)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[4px_4px_0px_0px_rgba(15,23,42,1)]"
+                className="bg-black dark:bg-slate-700 text-white dark:text-slate-200 hover:bg-yellow-400 dark:hover:bg-slate-600 hover:text-black dark:hover:text-white transition-colors border-4 border-black dark:border-slate-600 p-1.5 shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] dark:shadow-[4px_4px_0px_0px_rgba(2,6,23,1)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[4px_4px_0px_0px_rgba(15,23,42,1)] focus:outline-none focus:ring-4 focus:ring-yellow-400"
+                aria-label="Close project details"
               >
                 <X size={24} strokeWidth={4} />
               </button>
@@ -369,7 +377,7 @@ export default function App() {
       <nav className="fixed top-0 w-full bg-white/80 dark:bg-slate-900/90 backdrop-blur-md z-50 border-b-4 border-black dark:border-slate-600">
         <div className="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
           <span className="font-black text-3xl border-4 border-black dark:border-slate-600 px-4 py-1 transform -rotate-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-200 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(2,6,23,1)] outline outline-1 outline-transparent">LC</span>
-          <a href="#contact" className="flex items-center gap-2 bg-yellow-400 dark:bg-slate-800 border-4 border-black dark:border-slate-600 hover:bg-yellow-500 dark:hover:bg-slate-700 text-black dark:text-slate-200 px-6 py-2 font-black uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(2,6,23,1)]">
+          <a href="#contact" className="flex items-center gap-2 bg-yellow-400 dark:bg-slate-800 border-4 border-black dark:border-slate-600 hover:bg-yellow-500 dark:hover:bg-slate-700 text-black dark:text-slate-200 px-6 py-2 font-black uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(2,6,23,1)] focus:outline-none focus:ring-4 focus:ring-black dark:focus:ring-white">
             <Mail size={20} strokeWidth={3} /> CONTACT
           </a>
         </div>
@@ -383,6 +391,7 @@ export default function App() {
               {SITE_CONTENT.hero.name}
             </h1>
             <div className="relative w-80 h-56 flex items-end justify-center">
+              {/* Eager loaded intentionally since it is above the fold */}
               <img src={SITE_CONTENT.hero.profileImage} alt="Profile wave" className="relative z-10 w-full h-auto object-bottom" />
             </div>
           </div>
@@ -396,7 +405,7 @@ export default function App() {
             </p>
           </div>
 
-          <a href="#education" className="animate-bounce text-black dark:text-slate-400 mt-16">
+          <a href="#education" aria-label="Scroll to education section" className="animate-bounce text-black dark:text-slate-400 mt-16 focus:outline-none focus:ring-4 focus:ring-yellow-400 rounded-full">
             <ChevronDown size={56} strokeWidth={4} />
           </a>
         </section>
@@ -507,13 +516,13 @@ export default function App() {
                       <div className="space-y-6">
                         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                           <h4 className="text-3xl font-black uppercase text-slate-900 dark:text-slate-200">{proj.title}</h4>
-                          <a href={`/${proj.pdfLink}`} download className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest bg-yellow-400 dark:bg-slate-700 border-4 border-black dark:border-slate-600 px-6 py-3 hover:bg-black dark:hover:bg-slate-600 hover:text-white dark:hover:text-slate-200 transition-colors text-slate-900 dark:text-slate-200">
+                          <a href={`/${proj.pdfLink}`} download className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest bg-yellow-400 dark:bg-slate-700 border-4 border-black dark:border-slate-600 px-6 py-3 hover:bg-black dark:hover:bg-slate-600 hover:text-white dark:hover:text-slate-200 transition-colors text-slate-900 dark:text-slate-200 focus:outline-none focus:ring-4 focus:ring-black dark:focus:ring-white">
                             <Download size={18} strokeWidth={3} /> Download PDF
                           </a>
                         </div>
                         {proj.description && <p className="font-medium text-lg text-slate-700 dark:text-slate-400">{proj.description}</p>}
                         <div className="w-full h-[60vh] overflow-hidden border-4 border-black dark:border-slate-600 bg-slate-100 dark:bg-slate-900">
-                          <iframe src={proj.pdfLink} className="w-full h-full" title={proj.title}>
+                          <iframe src={proj.pdfLink} className="w-full h-full" title={`PDF Viewer for ${proj.title}`}>
                             <p className="p-4 text-slate-900 dark:text-slate-200">Browser does not support PDFs.</p>
                           </iframe>
                         </div>
@@ -547,12 +556,12 @@ export default function App() {
                     onClick={() => openSingleProject(PROJECT_CONTENT.computers, (
                       <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
                         <div className="w-full lg:w-1/2 shrink-0">
-                          <img src={proj.image} alt={proj.title} className="w-full border-4 border-black dark:border-slate-600 object-cover bg-slate-100 dark:bg-slate-900" />
+                          <img src={proj.image} alt={proj.title} loading="lazy" decoding="async" className="w-full border-4 border-black dark:border-slate-600 object-cover bg-slate-100 dark:bg-slate-900" />
                         </div>
                         <div className="w-full lg:w-1/2 space-y-6">
                           <h4 className="text-3xl font-black uppercase text-slate-900 dark:text-slate-200">{proj.title}</h4>
                           <p className="font-medium text-lg text-slate-700 dark:text-slate-400 leading-relaxed">{proj.description}</p>
-                          <a href={proj.link} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 bg-black dark:bg-slate-700 text-white dark:text-slate-200 px-6 py-4 font-black uppercase tracking-widest hover:bg-blue-400 dark:hover:bg-slate-600 hover:text-black dark:hover:text-white transition-colors border-4 border-black dark:border-slate-600">
+                          <a href={proj.link} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 bg-black dark:bg-slate-700 text-white dark:text-slate-200 px-6 py-4 font-black uppercase tracking-widest hover:bg-blue-400 dark:hover:bg-slate-600 hover:text-black dark:hover:text-white transition-colors border-4 border-black dark:border-slate-600 focus:outline-none focus:ring-4 focus:ring-black dark:focus:ring-white">
                             View on GitHub <ExternalLink size={20} strokeWidth={3} />
                           </a>
                         </div>
@@ -564,7 +573,10 @@ export default function App() {
                       <img 
                         src={proj.image} 
                         alt={proj.title} 
-                        className="absolute inset-0 w-full h-full object-cover opacity-90 mix-blend-multiply dark:mix-blend-normal group-hover:scale-105 transition-transform duration-500" 
+                        loading="lazy" 
+                        decoding="async"
+                        style={{ transform: `translateY(${(scrollY * 0.015) - 10}px) scale(1.15)` }}
+                        className="absolute inset-0 w-full h-full object-cover opacity-90 mix-blend-multiply dark:mix-blend-normal" 
                       />
                     </div>
                     <h4 className="text-2xl font-black uppercase text-slate-900 dark:text-slate-200 pr-8">{proj.title}</h4>
@@ -592,7 +604,7 @@ export default function App() {
                     onClick={() => openSingleProject(PROJECT_CONTENT.science, (
                       <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
                         <div className="w-full lg:w-1/2 shrink-0">
-                          <img src={proj.image} alt={proj.title} className="w-full border-4 border-black dark:border-slate-600 object-cover bg-slate-100 dark:bg-slate-900" />
+                          <img src={proj.image} alt={proj.title} loading="lazy" decoding="async" className="w-full border-4 border-black dark:border-slate-600 object-cover bg-slate-100 dark:bg-slate-900" />
                         </div>
                         <div className="w-full lg:w-1/2 space-y-6 flex flex-col">
                           <h4 className="text-3xl font-black uppercase text-slate-900 dark:text-slate-200">{proj.title}</h4>
@@ -616,7 +628,10 @@ export default function App() {
                       <img 
                         src={proj.image} 
                         alt={proj.title} 
-                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                        loading="lazy"
+                        decoding="async"
+                        style={{ transform: `translateY(${-(scrollY * 0.015)}px) scale(1.15)` }}
+                        className="absolute inset-0 w-full h-full object-cover" 
                       />
                     </div>
                     <h4 className="text-2xl font-black uppercase text-slate-900 dark:text-slate-200 pr-8 relative z-10">{proj.title}</h4>
@@ -640,14 +655,16 @@ export default function App() {
               <div className="flex flex-col items-center justify-center gap-12 mt-4">
                 
                 {/* WIDENED 5-PHOTO STACK WITH FAN-OUT HOVER */}
-                <div 
-                  className="relative w-full max-w-2xl h-72 sm:h-80 lg:h-96 cursor-pointer group mx-auto mt-4"
+                <button 
+                  className="relative w-full max-w-2xl h-72 sm:h-80 lg:h-96 cursor-pointer group mx-auto mt-4 focus:outline-none focus:ring-4 focus:ring-yellow-400 border-none bg-transparent block"
                   onClick={() => openSingleProject(PROJECT_CONTENT.photography, galleryContent)}
+                  aria-label="Open photo gallery"
                 >
                   {/* Photo 1: Back Left (IMG4 - Portrait ~3:4) */}
                   <img 
                     src={PROJECT_CONTENT.photography.images[3]} 
                     alt="Gallery Preview 1"
+                    loading="lazy" decoding="async"
                     className="absolute w-[25%] md:w-[22%] aspect-[3/4] object-cover left-[5%] md:left-[10%] top-[10%] border-4 border-black dark:border-slate-600 shadow-md transform -rotate-12 group-hover:-rotate-[20deg] group-hover:-translate-x-10 group-hover:-translate-y-4 transition-all duration-500 ease-out z-0 outline outline-1 outline-transparent"
                   />
                   
@@ -655,6 +672,7 @@ export default function App() {
                   <img 
                     src={PROJECT_CONTENT.photography.images[4]} 
                     alt="Gallery Preview 2"
+                    loading="lazy" decoding="async"
                     className="absolute w-[25%] md:w-[22%] aspect-[2/3] object-cover right-[5%] md:right-[10%] top-[5%] border-4 border-black dark:border-slate-600 shadow-md transform rotate-12 group-hover:rotate-[20deg] group-hover:translate-x-10 group-hover:-translate-y-4 transition-all duration-500 ease-out z-10 outline outline-1 outline-transparent"
                   />
 
@@ -662,6 +680,7 @@ export default function App() {
                   <img 
                     src={PROJECT_CONTENT.photography.images[2]} 
                     alt="Gallery Preview 3"
+                    loading="lazy" decoding="async"
                     className="absolute w-[30%] aspect-[2/3] object-cover left-[35%] top-[0%] border-4 border-black dark:border-slate-600 shadow-lg transform rotate-2 group-hover:-translate-y-10 group-hover:scale-105 transition-all duration-500 ease-out z-20 outline outline-1 outline-transparent"
                   />
 
@@ -669,6 +688,7 @@ export default function App() {
                   <img 
                     src={PROJECT_CONTENT.photography.images[0]} 
                     alt="Gallery Preview 4"
+                    loading="lazy" decoding="async"
                     className="absolute w-[45%] md:w-[40%] aspect-[3/2] object-cover left-[10%] bottom-[5%] border-4 border-black dark:border-slate-600 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(2,6,23,1)] transform -rotate-6 group-hover:-rotate-12 group-hover:-translate-x-8 group-hover:translate-y-4 transition-all duration-500 ease-out z-30 outline outline-1 outline-transparent"
                   />
 
@@ -676,13 +696,14 @@ export default function App() {
                   <img 
                     src={PROJECT_CONTENT.photography.images[1]} 
                     alt="Gallery Preview 5"
+                    loading="lazy" decoding="async"
                     className="absolute w-[38%] md:w-[35%] aspect-[2000/2170] object-cover right-[12%] bottom-[0%] border-4 border-black dark:border-slate-600 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(2,6,23,1)] transform rotate-6 group-hover:rotate-12 group-hover:translate-x-8 group-hover:translate-y-6 group-hover:scale-105 transition-all duration-500 ease-out z-40 outline outline-1 outline-transparent bg-slate-200"
                   />
-                </div>
+                </button>
 
                 <button 
                   onClick={() => openSingleProject(PROJECT_CONTENT.photography, galleryContent)}
-                  className="group border-4 border-black dark:border-slate-600 px-8 py-4 uppercase font-black tracking-widest text-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-200 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(2,6,23,1)] hover:-translate-y-1 hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[12px_12px_0px_0px_rgba(2,6,23,1)] hover:bg-black dark:hover:bg-slate-600 hover:text-white dark:hover:text-slate-200 transition-all flex items-center gap-3 outline outline-1 outline-transparent"
+                  className="group border-4 border-black dark:border-slate-600 px-8 py-4 uppercase font-black tracking-widest text-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-200 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(2,6,23,1)] hover:-translate-y-1 hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[12px_12px_0px_0px_rgba(2,6,23,1)] hover:bg-black dark:hover:bg-slate-600 hover:text-white dark:hover:text-slate-200 transition-all flex items-center gap-3 outline outline-1 outline-transparent focus:outline-none focus:ring-4 focus:ring-yellow-400"
                 >
                   View Full Gallery <ArrowUpRight size={24} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </button>
@@ -694,7 +715,8 @@ export default function App() {
               
               <button 
                 onClick={() => setShowFuture(!showFuture)}
-                className="w-full p-6 md:p-8 flex flex-row items-center justify-between hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer text-left"
+                className="w-full p-6 md:p-8 flex flex-row items-center justify-between hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer text-left focus:outline-none focus:ring-4 focus:ring-yellow-400"
+                aria-expanded={showFuture}
               >
                 <div className="flex items-center gap-4 md:gap-6">
                   <div className="bg-white dark:bg-slate-900 p-3 border-4 border-black dark:border-slate-600 transform -rotate-3 shrink-0 outline outline-1 outline-transparent">
@@ -721,7 +743,7 @@ export default function App() {
                       <p key={idx}>{para}</p>
                     ))}
                     <p>
-                      <a href={`mailto:${SITE_CONTENT.contact.email}`} className="font-bold underline decoration-4 decoration-black dark:decoration-slate-400 underline-offset-4 hover:text-blue-600 transition-colors">Email me</a> if you want to collaborate on any of these.
+                      <a href={`mailto:${SITE_CONTENT.contact.email}`} className="font-bold underline decoration-4 decoration-black dark:decoration-slate-400 underline-offset-4 hover:text-blue-600 transition-colors focus:outline-none focus:ring-4 focus:ring-yellow-400 rounded-sm">Email me</a> if you want to collaborate on any of these.
                     </p>
                   </div>
 
@@ -730,29 +752,25 @@ export default function App() {
                       <ProjectCard 
                         key={idx}
                         onClick={() => openSingleProject(PROJECT_CONTENT.accessibility, (
-                          <div className="space-y-6">
-                            <h4 className="text-3xl font-black uppercase text-slate-900 dark:text-slate-200">{proj.title}</h4>
-                            
-                            {/* Flex layout with fixed width 1x1 image */}
-                            <div className="flex flex-col sm:flex-row gap-6 lg:gap-8 items-start">
-                              <img 
-                                src={proj.image} 
-                                alt={proj.title} 
-                                className="w-32 h-32 sm:w-48 sm:h-48 shrink-0 border-4 border-black dark:border-slate-600 object-cover bg-slate-100 dark:bg-slate-900 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(2,6,23,1)] outline outline-1 outline-transparent" 
-                              />
-                              <div className="space-y-4 font-medium text-lg text-slate-700 dark:text-slate-400 flex-1">
-                                {proj.paragraphs?.map((para, pIdx) => (
-                                   <p key={pIdx} dangerouslySetInnerHTML={{ __html: para }}></p>
-                                ))}
-                                {proj.status && (
-                                  <div className="inline-block w-fit bg-slate-200 dark:bg-slate-700 border-4 border-black dark:border-slate-600 p-4 mt-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(2,6,23,1)]">
-                                    <span className="font-black uppercase tracking-widest text-sm block mb-1 text-slate-900 dark:text-slate-300">Status</span>
-                                    <p className="font-bold text-2xl leading-none text-slate-900 dark:text-slate-200">{proj.status}</p>
-                                  </div>
-                                )}
-                              </div>
+                          <div className="flex flex-col sm:flex-row gap-6 lg:gap-8 items-start">
+                            <img 
+                              src={proj.image} 
+                              alt={proj.title} 
+                              loading="lazy" decoding="async"
+                              className="w-32 h-32 sm:w-48 sm:h-48 shrink-0 border-4 border-black dark:border-slate-600 object-cover bg-slate-100 dark:bg-slate-900 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(2,6,23,1)] outline outline-1 outline-transparent" 
+                            />
+                            <div className="space-y-4 font-medium text-lg text-slate-700 dark:text-slate-400 flex-1">
+                              <h4 className="text-3xl font-black uppercase text-slate-900 dark:text-slate-200">{proj.title}</h4>
+                              {proj.paragraphs?.map((para, pIdx) => (
+                                 <p key={pIdx} dangerouslySetInnerHTML={{ __html: para }}></p>
+                              ))}
+                              {proj.status && (
+                                <div className="inline-block w-fit bg-slate-200 dark:bg-slate-700 border-4 border-black dark:border-slate-600 p-4 mt-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(2,6,23,1)]">
+                                  <span className="font-black uppercase tracking-widest text-sm block mb-1 text-slate-900 dark:text-slate-300">Status</span>
+                                  <p className="font-bold text-2xl leading-none text-slate-900 dark:text-slate-200">{proj.status}</p>
+                                </div>
+                              )}
                             </div>
-
                           </div>
                         ))}
                         className="p-6 flex items-center justify-between"
@@ -784,6 +802,8 @@ export default function App() {
                 <img 
                   src={SITE_CONTENT.bio.image} 
                   alt="Lucas Profile" 
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-auto border-4 border-black dark:border-slate-600 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(2,6,23,1)] object-cover aspect-square transform -rotate-2 outline outline-1 outline-transparent" 
                 />
               </div>
@@ -796,10 +816,10 @@ export default function App() {
                   
                   {/* Your primary links */}
                   <div className="flex flex-wrap gap-4 pt-8">
-                    <a href={SITE_CONTENT.bio.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-blue-500 dark:bg-blue-600 text-white px-8 py-4 font-black uppercase tracking-widest border-4 border-black dark:border-slate-600 hover:bg-blue-600 dark:hover:bg-blue-500 transition-colors shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(2,6,23,1)] hover:-translate-y-1">
+                    <a href={SITE_CONTENT.bio.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-blue-500 dark:bg-blue-600 text-white px-8 py-4 font-black uppercase tracking-widest border-4 border-black dark:border-slate-600 hover:bg-blue-600 dark:hover:bg-blue-500 transition-colors shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(2,6,23,1)] hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-black dark:focus:ring-white">
                       <Linkedin size={20} strokeWidth={3} /> LinkedIn
                     </a>
-                    <a href={SITE_CONTENT.bio.github} target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-slate-900 dark:bg-slate-700 text-white px-8 py-4 font-black uppercase tracking-widest border-4 border-black dark:border-slate-600 hover:bg-slate-800 dark:hover:bg-slate-600 transition-colors shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(2,6,23,1)] hover:-translate-y-1">
+                    <a href={SITE_CONTENT.bio.github} target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-slate-900 dark:bg-slate-700 text-white px-8 py-4 font-black uppercase tracking-widest border-4 border-black dark:border-slate-600 hover:bg-slate-800 dark:hover:bg-slate-600 transition-colors shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(2,6,23,1)] hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-yellow-400">
                       <Github size={20} strokeWidth={3} /> GitHub
                     </a>
                   </div>
@@ -810,15 +830,17 @@ export default function App() {
                   <img 
                     src={SITE_CONTENT.bio.sisterImage} 
                     alt="Sister Profile" 
+                    loading="lazy"
+                    decoding="async"
                     className="w-20 h-20 border-4 border-black dark:border-slate-600 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(2,6,23,1)] object-cover bg-white shrink-0" 
                   />
                   <div>
                     <p className="font-bold text-lg text-slate-900 dark:text-slate-200 mb-4">{SITE_CONTENT.bio.sisterText}</p>
                     <div className="flex gap-6">
-                      <a href={SITE_CONTENT.bio.sisterLinkedin} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-black uppercase text-blue-700 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300 transition-colors underline decoration-4 underline-offset-4">
+                      <a href={SITE_CONTENT.bio.sisterLinkedin} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-black uppercase text-blue-700 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300 transition-colors underline decoration-4 underline-offset-4 focus:outline-none focus:ring-4 focus:ring-black dark:focus:ring-white rounded-sm">
                         <Linkedin size={18} strokeWidth={3} /> LinkedIn
                       </a>
-                      <a href={SITE_CONTENT.bio.sisterGithub} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-black uppercase text-slate-900 dark:text-slate-300 hover:text-slate-600 dark:hover:text-white transition-colors underline decoration-4 underline-offset-4">
+                      <a href={SITE_CONTENT.bio.sisterGithub} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-black uppercase text-slate-900 dark:text-slate-300 hover:text-slate-600 dark:hover:text-white transition-colors underline decoration-4 underline-offset-4 focus:outline-none focus:ring-4 focus:ring-black dark:focus:ring-white rounded-sm">
                         <Github size={18} strokeWidth={3} /> GitHub
                       </a>
                     </div>
@@ -860,7 +882,7 @@ export default function App() {
             <p className="text-2xl font-bold mb-12 max-w-md mx-auto text-slate-900 dark:text-slate-400">{SITE_CONTENT.contact.tagline}</p>
             <a 
               href={`mailto:${SITE_CONTENT.contact.email}`} 
-              className="bg-black dark:bg-slate-700 text-white dark:text-slate-200 text-2xl font-black px-16 py-6 uppercase tracking-widest hover:bg-slate-800 dark:hover:bg-slate-600 transition-colors inline-flex items-center gap-4 border-4 border-black dark:border-slate-600 hover:scale-105 active:scale-95 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(15,23,42,1)]"
+              className="bg-black dark:bg-slate-700 text-white dark:text-slate-200 text-2xl font-black px-16 py-6 uppercase tracking-widest hover:bg-slate-800 dark:hover:bg-slate-600 transition-colors inline-flex items-center gap-4 border-4 border-black dark:border-slate-600 hover:scale-105 active:scale-95 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(15,23,42,1)] focus:outline-none focus:ring-4 focus:ring-black dark:focus:ring-white"
             >
               <Mail size={28} strokeWidth={3} /> Send Email
             </a>
