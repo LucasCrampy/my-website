@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-  /* Bringing back the heavy, blocky feel for headings */
   --font-blocky: "Archivo Black", ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -60,28 +59,31 @@
   }
 }
 
-/* Hero arch window – visible pattern for parallax depth */
-.hero-arch-pattern {
-  background-color: transparent;
-  background-image:
-    repeating-linear-gradient(
-      135deg,
-      rgba(37, 99, 235, 0.18),
-      rgba(37, 99, 235, 0.18) 6px,
-      transparent 6px,
-      transparent 16px
-    );
+/* Parallax: binary (1/0) pattern – hero arch + bio photo */
+@keyframes bioBinaryScroll {
+  to { background-position: 56px 0; }
 }
-.dark .hero-arch-pattern {
+.bio-binary-pattern {
   background-color: transparent;
-  background-image:
-    repeating-linear-gradient(
-      135deg,
-      rgba(191, 219, 254, 0.3),
-      rgba(191, 219, 254, 0.3) 6px,
-      transparent 6px,
-      transparent 16px
-    );
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 56'%3E%3Ctext x='0' y='16' font-size='14' font-family='ui-monospace,monospace' fill='%232563eb' fill-opacity='0.22'%3E1%3C/text%3E%3Ctext x='14' y='16' font-size='14' font-family='ui-monospace,monospace' fill='%232563eb' fill-opacity='0.22'%3E0%3C/text%3E%3Ctext x='28' y='16' font-size='14' font-family='ui-monospace,monospace' fill='%232563eb' fill-opacity='0.22'%3E1%3C/text%3E%3Ctext x='42' y='16' font-size='14' font-family='ui-monospace,monospace' fill='%232563eb' fill-opacity='0.22'%3E0%3C/text%3E%3Ctext x='0' y='32' font-size='14' font-family='ui-monospace,monospace' fill='%232563eb' fill-opacity='0.22'%3E0%3C/text%3E%3Ctext x='14' y='32' font-size='14' font-family='ui-monospace,monospace' fill='%232563eb' fill-opacity='0.22'%3E1%3C/text%3E%3Ctext x='28' y='32' font-size='14' font-family='ui-monospace,monospace' fill='%232563eb' fill-opacity='0.22'%3E0%3C/text%3E%3Ctext x='42' y='32' font-size='14' font-family='ui-monospace,monospace' fill='%232563eb' fill-opacity='0.22'%3E1%3C/text%3E%3Ctext x='0' y='48' font-size='14' font-family='ui-monospace,monospace' fill='%232563eb' fill-opacity='0.22'%3E1%3C/text%3E%3Ctext x='14' y='48' font-size='14' font-family='ui-monospace,monospace' fill='%232563eb' fill-opacity='0.22'%3E0%3C/text%3E%3Ctext x='28' y='48' font-size='14' font-family='ui-monospace,monospace' fill='%232563eb' fill-opacity='0.22'%3E1%3C/text%3E%3Ctext x='42' y='48' font-size='14' font-family='ui-monospace,monospace' fill='%232563eb' fill-opacity='0.22'%3E0%3C/text%3E%3C/svg%3E");
+  background-size: 56px 56px;
+  background-position: 0 0;
+  animation: bioBinaryScroll 8s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bio-binary-pattern { animation: none; }
 }
 
-/* (icon wobble animation removed by design) */
+/* Bio photo frame: slight tilt, crisp inner edge, drop shadow (GPU layer) */
+.bio-photo-frame {
+  transform: rotate(-1deg) translateZ(0);
+  backface-visibility: hidden;
+  box-shadow:
+    8px 8px 0 0 rgba(0, 0, 0, 1),
+    inset 0 0 0 2px #0f0f0f;
+}
+.dark .bio-photo-frame {
+  box-shadow:
+    8px 8px 0 0 rgba(2, 6, 23, 1),
+    inset 0 0 0 2px #475569;
+}

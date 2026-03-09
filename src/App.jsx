@@ -44,10 +44,12 @@ export default function App() {
   const [lightboxImage, setLightboxImage] = useState(null);
   const [showFuture, setShowFuture] = useState(false);
   const [heroParallax, setHeroParallax] = useState(0);
+  const [bioParallax, setBioParallax] = useState(0);
   const lastFocusRef = useRef(/** @type {HTMLElement | null} */ (null));
   const modalCloseRef = useRef(/** @type {HTMLButtonElement | null} */ (null));
   const lightboxCloseRef = useRef(/** @type {HTMLButtonElement | null} */ (null));
   const heroRef = useRef(/** @type {HTMLDivElement | null} */ (null));
+  const bioSectionRef = useRef(/** @type {HTMLElement | null} */ (null));
   const educationRevealRef = useScrollReveal();
   const projectsRevealRef = useScrollReveal();
   const aboutRevealRef = useScrollReveal();
@@ -126,6 +128,12 @@ export default function App() {
         const vh = window.innerHeight;
         const progress = Math.min(scrollY / vh, 1);
         setHeroParallax(progress);
+        const bioEl = bioSectionRef.current;
+        if (bioEl) {
+          const bioTop = bioEl.getBoundingClientRect().top + scrollY;
+          const bioProgress = (scrollY - bioTop + vh * 0.5) / (vh * 0.7);
+          setBioParallax(Math.min(Math.max(bioProgress, 0), 1));
+        }
       });
     };
 
@@ -260,12 +268,12 @@ export default function App() {
             <div ref={heroRef} className="relative w-80">
               <div className="relative w-full h-full overflow-visible">
                 <div
-                  className="absolute bottom-0 left-[-5%] right-[10%] h-[103%] rounded-t-full border-4 border-black dark:border-slate-700 overflow-hidden bg-[#bfdbfe] dark:bg-[#1d4ed8]"
+                  className="absolute bottom-0 left-[-5%] right-[10%] h-[103%] rounded-t-full border-4 border-black dark:border-slate-700 overflow-hidden bg-[#bfdbfe]"
                   aria-hidden="true"
                 >
                   <div
-                    className="absolute bottom-0 left-0 right-0 h-[300%] hero-arch-pattern"
-                    style={{ transform: `translateY(${heroParallax * 200}px)` }}
+                    className="absolute bottom-0 left-0 right-0 h-[300%] bio-binary-pattern"
+                    style={{ transform: `translateY(${heroParallax * 80}px)` }}
                   />
                 </div>
                 <div
@@ -613,18 +621,26 @@ export default function App() {
         </section>
 
         {/* BIO SECTION */}
-        <section id="bio" className="py-24 border-t-8 border-black dark:border-slate-700">
+        <section id="bio" ref={bioSectionRef} className="py-24 border-t-8 border-black dark:border-slate-700">
           <h3 ref={aboutRevealRef} className="reveal-on-scroll text-5xl font-black uppercase mb-12 tracking-tighter text-slate-900 dark:text-slate-200 [font-family:var(--font-blocky)]">About Me</h3>
           <div className="bg-white dark:bg-slate-800 border-4 border-black dark:border-slate-600 p-8 md:p-12 shadow-[16px_16px_0px_0px_rgba(0,0,0,1)] dark:shadow-[16px_16px_0px_0px_rgba(2,6,23,1)]">
             <div className="flex flex-col md:flex-row gap-12 items-center md:items-start">
-              <div className="w-full md:w-1/3">
-                <img 
-                  src={SITE_CONTENT.bio.image} 
-                  alt="Lucas Profile" 
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-auto border-4 border-black dark:border-slate-600 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(2,6,23,1)] object-cover aspect-square transform -rotate-2 outline outline-1 outline-transparent" 
-                />
+              <div className="w-full md:w-1/3 relative overflow-visible">
+                <div className="bio-photo-frame w-full aspect-square relative overflow-hidden border-4 border-black dark:border-slate-600 outline outline-1 outline-transparent">
+                  <div className="absolute inset-0 bg-[#bfdbfe]" aria-hidden="true">
+                    <div
+                      className="absolute -top-[50%] left-1/2 h-[700%] w-[220%] bio-binary-pattern"
+                      style={{ transform: `translate(-50%, ${bioParallax * 80}px)` }}
+                    />
+                  </div>
+                  <img
+                    src={SITE_CONTENT.bio.image}
+                    alt="Lucas Profile"
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 z-10 w-full h-full object-cover"
+                  />
+                </div>
               </div>
               <div className="w-full md:w-2/3 flex flex-col justify-between h-full space-y-8">
                 <div>

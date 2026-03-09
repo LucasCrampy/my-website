@@ -20,7 +20,7 @@ export const siteContent = {
   },
   bio: {
     title: "Who I Am",
-    image: "profile-lucas.jpg",
+    image: "profile-lucas.png",
     text: "I'm a student at Olympic College passionate about mathematics and the sciences. When I'm not studying, I enjoy photography, hiking, going on runs, playing videogames, and trying new things. I hope to some day make a positive impact in the world through my work. Growing up with an older sister with cerebral palsy has instilled in me a deep-seated empathy and a drive to help those with special needs. I also have always had a deep appreciation for the natural world and the life that it inhabits. For these reasons, environmental conservation and helping people with disabilities are two causes that are especially important to me.",
     linkedin: "https://www.linkedin.com/in/lucas-crampton-0b9917306/",
     github: "https://github.com/LucasCrampy",
@@ -165,7 +165,7 @@ export const projectContent = {
     title: "Future Projects",
     color: "bg-blue-200 dark:bg-slate-800",
     headerTitle: "Future Project Ideas",
-    headerSubtitle: "Ideas I plan to tackle in the future, including accessible open-source software.",
+    headerSubtitle: "A few ideas I plan to tackle in the future.",
     introParagraphs: [
       "These are some of my future project ideas I will start when I have the time.",
       "While I'm generally busy with school work, I think the best way to learn is to solve hard problems."
