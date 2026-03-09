@@ -8,20 +8,25 @@
  */
 
 export const siteContent = {
+  reflection: {
+    enabled: true,
+    label: "Reflection",
+    pdfPath: "reflection.pdf"
+  },
   hero: {
     name: "LUCAS CRAMPTON",
     major: "APPLIED MATH",
-    tagline: '"A student just happy to be here."',
+    tagline: '"Enjoying the process of learning."', 
     profileImage: "hero-wave-transparent.gif"
   },
-  contact: {
+  contact: {  
     tagline: "Email me any time!",
     email: "lucaschioinocrampton@gmail.com"
   },
   bio: {
     title: "Who I Am",
     image: "profile-lucas.png",
-    text: "I'm a student at Olympic College passionate about mathematics and the sciences. When I'm not studying, I enjoy photography, hiking, going on runs, playing videogames, and trying new things. I hope to some day make a positive impact in the world through my work. Growing up with an older sister with cerebral palsy has instilled in me a deep-seated empathy and a drive to help those with special needs. I also have always had a deep appreciation for the natural world and the life that it inhabits. For these reasons, environmental conservation and helping people with disabilities are two causes that are especially important to me.",
+    text: "I'm a student at Olympic College passionate about mathematics and the sciences. When I'm not studying, I enjoy photography, hiking, going on runs, playing videogames, and trying new things. I hope to someday make a positive impact in the world through my work. Growing up with an older sister with cerebral palsy has instilled in me a deep-seated empathy and a drive to help those with special needs. I also have always had a deep appreciation for the natural world and the life that it inhabits. For these reasons, environmental conservation and helping people with disabilities are two causes that are especially important to me.",
     linkedin: "https://www.linkedin.com/in/lucas-crampton-0b9917306/",
     github: "https://github.com/LucasCrampy",
     sisterText: "My younger sister is a data science student at Northeastern and does some cool stuff. Check out her work:",
@@ -71,7 +76,7 @@ export const siteContent = {
     }
   },
   experience: [
-    { role: "Individual Cargiver", year: "2025 - Present" },
+    { role: "Individual Caregiver", year: "2025 - Present" },
     { role: "Carpentry Apprentice", year: "2025" },
     { role: "Freelance IT Work", year: "2025" },
     { role: "Mouse Magic Toys", year: "2024" },
@@ -92,12 +97,12 @@ export const projectContent = {
       {
         title: "The Bug Problem",
         pdfLink: "Math-Project-1.pdf",
-        description: "A Calculus 3 project analyzing the trajectory of four bugs chasing each other in a square formation. The solution explores both polar coordinate differential equations and geometric series. In the problem sheet we were given, we were guided through the process of solving it with polar quardinates but I came up with a more intuitive way to solve it with geometric series. This method of using a series was kinda builds up from a simpler discrete problem into what is essentially the definition of an integral. I really enjoyed this project because its a great example of how even a simple problem can be solved in a myriad of ways. "
+        description: "A Calculus 3 project analyzing the trajectory of four bugs chasing each other in a square formation. The solution explores both polar coordinate differential equations and geometric series. In the problem sheet we were given, we were guided through the process of solving it with polar coordinates but I came up with a more intuitive way to solve it with geometric series. This method of using a series kinda builds up from a simpler discrete problem into what is essentially the definition of an integral. I really enjoyed this project because it's a great example of how even a simple problem can be solved in a myriad of ways."
       },
       {
-        title: "Keplers Laws",
+        title: "Kepler's Laws",
         pdfLink: "Math-Project-2.pdf",
-        description: "This project I used vector calculus and taylor series to derive Kepler's second and third laws from his first law. I liked connecting the physics and astronomy to math concepts we were learning in class and seeing how they all fit together. I also thought it was pretty cool to follow in Keplers footseps in a way and better understand the logic behind the laws."
+        description: "This project I used vector calculus and Taylor series to derive Kepler's second and third laws from his first law. I liked connecting the physics and astronomy to math concepts we were learning in class and seeing how they all fit together. I also thought it was pretty cool to follow in Kepler's footsteps in a way and better understand the logic behind the laws."
       }
     ]
   },
@@ -113,13 +118,13 @@ export const projectContent = {
         title: "Terminal Chess",
         image: "Project1-Screenshot.jpg",
         link: "https://github.com/LucasCrampy/FirstProject_SimpleChessJava",
-        description: "This was my final project for my first Java class. I have always enjoyed playing chess and decided to build a simple chess game that can be played in the terminal. For this project I was focused on using the object oriented programming concepts we were learning in class to build a chess board simulation."
+        description: "This was my final project for my first Java class. I have always enjoyed playing chess and decided to build a simple chess game that can be played in the terminal. For this project I was focused on using the object-oriented programming concepts we were learning in class to build a chess board simulation."
       },
       {
         title: "Mold Simulation",
         image: "Project2-Screenshot.jpg",
         link: "https://github.com/LucasCrampy/Final-Project-2.git",
-        description: "This is my final project for my second Java class at Olympic College. Its a simple simulation of a mold that grows and spreads in a maze system. The project uses a simple path finding algorithm to determine how the mold spreads and interacts with the environment."
+        description: "This is my final project for my second Java class at Olympic College. It's a simple simulation of a mold that grows and spreads in a maze system. The project uses a simple pathfinding algorithm to determine how the mold spreads and interacts with the environment."
       }
     ]
   },
@@ -127,7 +132,7 @@ export const projectContent = {
     id: "photography",
     icon: "camera",
     title: "Photography",
-    color: "bg-purple-200 dark:bg-slate-800",
+    color: "bg-violet-300 dark:bg-slate-800",
     headerTitle: "Photo Gallery",
     headerSubtitle: "A collection of photos I have taken over the years.",
     images: Array.from({ length: 37 }, (_, i) => `WEBIMG${i + 1}.jpg`)
@@ -144,8 +149,8 @@ export const projectContent = {
         title: "Passive Acoustic Monitoring",
         image: "AudioMoth-Diagram.jpg",
         paragraphs: [
-          "I am building a passive acoustic monitoring device using an <strong>AudioMoth</strong> development board and modifications with parts from AliExpress. With the modifications I should have similary performance to much higher end devices of the same type.",
-          "The objective is to deploy this device in the woods to collect raw audio data. Once collected, I will run the data through the Google's <strong>Perch model</strong> to identify bird calls and generate population estimates for local songbird species."
+          "I am building a passive acoustic monitoring device using an <strong>AudioMoth</strong> development board and modifications with parts from AliExpress. With the modifications I should have similar performance to much higher end devices of the same type.",
+          "The objective is to deploy this device in the woods to collect raw audio data. Once collected, I will run the data through Google's <strong>Perch model</strong> to identify bird calls and generate population estimates for local songbird species."
         ],
         status: "Deploying Spring 2026"
       },
@@ -177,7 +182,7 @@ export const projectContent = {
         title: "Open Source Speech App",
         image: "char-lucas.jpg",
         paragraphs: [
-          "My older sister, Charlotte, has cerebral palsy and is nonverbal. She communicates with a text to speech app on her iPad, and generally feels more comfortable communcating over text. The app she uses costs something like $100 and I thought that was a bit excessive for what it is. I think haveing an opensource alternitive would be great. I think it would be a fun project to refresh my coding skills and I could taylor make the app to meet my sisters needs. ",
+          "My older sister, Charlotte, has cerebral palsy and is nonverbal. She communicates with a text-to-speech app on her iPad, and generally feels more comfortable communicating over text. The app she uses costs something like $100 and I thought that was a bit excessive for what it is. I think having an open-source alternative would be great. I think it would be a fun project to refresh my coding skills and I could tailor-make the app to meet my sister's needs."
         ],
         status: "In Planning Phase"
       }

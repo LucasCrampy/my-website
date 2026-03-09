@@ -3,6 +3,7 @@ import { Mail, ChevronDown, Code, Camera, Leaf, GraduationCap, Calculator, X, Li
 import { siteContent as SITE_CONTENT, projectContent as PROJECT_CONTENT } from './data/siteContent';
 import ProjectCard from './components/ProjectCard';
 import ProjectModalContent from './components/ProjectModalContent';
+import ReflectionWidget from './components/ReflectionWidget';
 
 // Icon mapping: string key → React component
 const ICON_MAP = {
@@ -43,6 +44,7 @@ export default function App() {
   const [activeProject, setActiveProject] = useState(null);
   const [lightboxImage, setLightboxImage] = useState(null);
   const [showFuture, setShowFuture] = useState(false);
+  const [reflectionOpen, setReflectionOpen] = useState(false);
   const [heroParallax, setHeroParallax] = useState(0);
   const [bioParallax, setBioParallax] = useState(0);
   const lastFocusRef = useRef(/** @type {HTMLElement | null} */ (null));
@@ -56,13 +58,13 @@ export default function App() {
   const experienceRevealRef = useScrollReveal();
 
   useEffect(() => {
-    if (activeProject || lightboxImage) {
+    if (activeProject || lightboxImage || reflectionOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'auto';
     }
     return () => { document.body.style.overflow = 'auto'; };
-  }, [activeProject, lightboxImage]);
+  }, [activeProject, lightboxImage, reflectionOpen]);
 
   const isProjectObject = (x) =>
     x && typeof x === 'object' && x.title && (x.pdfLink || x.link || x.paragraphs);
@@ -252,9 +254,18 @@ export default function App() {
       <nav className="fixed top-0 w-full bg-white/80 dark:bg-slate-900/90 backdrop-blur-md z-50 border-b-4 border-black dark:border-slate-600">
         <div className="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
           <span className="font-black text-3xl border-4 border-black dark:border-slate-600 px-4 py-1 transform -rotate-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-200 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(2,6,23,1)] outline outline-1 outline-transparent">LC</span>
-          <a href="#contact" className="flex items-center gap-2 bg-yellow-400 dark:bg-slate-800 border-4 border-black dark:border-slate-600 hover:bg-yellow-500 dark:hover:bg-slate-700 text-black dark:text-slate-200 px-6 py-2 font-black uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(2,6,23,1)] focus:outline-none focus-visible:ring-4 focus-visible:ring-black dark:focus-visible:ring-white">
-            <Mail size={20} strokeWidth={3} /> CONTACT
-          </a>
+          <div className="flex items-center gap-3">
+            {SITE_CONTENT.reflection?.enabled && (
+              <ReflectionWidget
+                label={SITE_CONTENT.reflection.label}
+                pdfPath={SITE_CONTENT.reflection.pdfPath}
+                onOpenChange={setReflectionOpen}
+              />
+            )}
+            <a href="#contact" className="flex items-center gap-2 bg-yellow-400 dark:bg-slate-800 border-4 border-black dark:border-slate-600 hover:bg-yellow-500 dark:hover:bg-slate-700 text-black dark:text-slate-200 px-6 py-2 font-black uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(2,6,23,1)] focus:outline-none focus-visible:ring-4 focus-visible:ring-black dark:focus-visible:ring-white">
+              <Mail size={20} strokeWidth={3} /> CONTACT
+            </a>
+          </div>
         </div>
       </nav>
 
@@ -497,51 +508,91 @@ export default function App() {
 
               <div className="flex flex-col items-center justify-center gap-12 mt-4">
                 
-                {/* WIDENED 5-PHOTO STACK WITH FAN-OUT HOVER */}
+                {/* WIDENED 7-PHOTO STACK WITH FAN-OUT HOVER */}
                 <button 
                   className="relative w-full max-w-2xl h-72 sm:h-80 lg:h-96 cursor-pointer group mx-auto mt-4 focus:outline-none focus-visible:ring-4 focus-visible:ring-yellow-400 border-none bg-transparent block"
                   onClick={() => openSingleProject(PROJECT_CONTENT.photography, galleryContent)}
                   aria-label="Open photo gallery"
                 >
                   {/* Photo 1: Back Left (IMG4 - Portrait ~3:4) */}
-                  <img 
-                    src={PROJECT_CONTENT.photography.images[3]} 
-                    alt="Gallery Preview 1"
-                    loading="lazy" decoding="async"
-                    className="absolute w-[25%] md:w-[22%] aspect-[3/4] object-cover left-[5%] md:left-[10%] top-[10%] border-4 border-black dark:border-slate-600 shadow-md transform -rotate-12 group-hover:-rotate-[20deg] group-hover:-translate-x-10 group-hover:-translate-y-4 transition-all duration-500 ease-out z-0 outline outline-1 outline-transparent"
-                  />
+                  <div
+                    className="absolute w-[25%] md:w-[22%] left-[2%] md:left-[7%] top-[10%] bg-slate-50 dark:bg-slate-800 border-4 border-black dark:border-slate-600 p-2 pb-7 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(2,6,23,1)] transform -rotate-12 group-hover:-rotate-[22deg] group-hover:-translate-x-14 group-hover:-translate-y-6 transition-all duration-500 ease-out z-10 outline outline-1 outline-transparent"
+                    aria-hidden="true"
+                  >
+                    <div className="w-full aspect-[3/4] overflow-hidden border-2 border-black dark:border-slate-600 bg-slate-100 dark:bg-slate-900">
+                      <img
+                        src={PROJECT_CONTENT.photography.images[3]}
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
                   
                   {/* Photo 2: Back Right (IMG5 - Portrait 2:3) */}
-                  <img 
-                    src={PROJECT_CONTENT.photography.images[4]} 
-                    alt="Gallery Preview 2"
-                    loading="lazy" decoding="async"
-                    className="absolute w-[25%] md:w-[22%] aspect-[2/3] object-cover right-[5%] md:right-[10%] top-[5%] border-4 border-black dark:border-slate-600 shadow-md transform rotate-12 group-hover:rotate-[20deg] group-hover:translate-x-10 group-hover:-translate-y-4 transition-all duration-500 ease-out z-10 outline outline-1 outline-transparent"
-                  />
+                  <div
+                    className="absolute w-[25%] md:w-[22%] right-[2%] md:right-[7%] top-[6%] bg-slate-50 dark:bg-slate-800 border-4 border-black dark:border-slate-600 p-2 pb-7 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(2,6,23,1)] transform rotate-12 group-hover:rotate-[22deg] group-hover:translate-x-14 group-hover:-translate-y-6 transition-all duration-500 ease-out z-20 outline outline-1 outline-transparent"
+                    aria-hidden="true"
+                  >
+                    <div className="w-full aspect-[2/3] overflow-hidden border-2 border-black dark:border-slate-600 bg-slate-100 dark:bg-slate-900">
+                      <img
+                        src={PROJECT_CONTENT.photography.images[4]}
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
 
                   {/* Photo 3: Middle Center (IMG3 - Portrait 2:3) */}
-                  <img 
-                    src={PROJECT_CONTENT.photography.images[2]} 
-                    alt="Gallery Preview 3"
-                    loading="lazy" decoding="async"
-                    className="absolute w-[30%] aspect-[2/3] object-cover left-[35%] top-[0%] border-4 border-black dark:border-slate-600 shadow-lg transform rotate-2 group-hover:-translate-y-10 group-hover:scale-105 transition-all duration-500 ease-out z-20 outline outline-1 outline-transparent"
-                  />
+                  <div
+                    className="absolute w-[30%] left-[35%] top-[-2%] bg-slate-50 dark:bg-slate-800 border-4 border-black dark:border-slate-600 p-2 pb-7 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(2,6,23,1)] transform rotate-2 group-hover:-translate-y-12 group-hover:scale-[1.08] transition-all duration-500 ease-out z-30 outline outline-1 outline-transparent"
+                    aria-hidden="true"
+                  >
+                    <div className="w-full aspect-[2/3] overflow-hidden border-2 border-black dark:border-slate-600 bg-slate-100 dark:bg-slate-900">
+                      <img
+                        src={PROJECT_CONTENT.photography.images[2]}
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
 
                   {/* Photo 4: Front Left (IMG1 - Landscape 3:2) */}
-                  <img 
-                    src={PROJECT_CONTENT.photography.images[0]} 
-                    alt="Gallery Preview 4"
-                    loading="lazy" decoding="async"
-                    className="absolute w-[45%] md:w-[40%] aspect-[3/2] object-cover left-[10%] bottom-[5%] border-4 border-black dark:border-slate-600 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(2,6,23,1)] transform -rotate-6 group-hover:-rotate-12 group-hover:-translate-x-8 group-hover:translate-y-4 transition-all duration-500 ease-out z-30 outline outline-1 outline-transparent"
-                  />
+                  <div
+                    className="absolute w-[45%] md:w-[40%] left-[6%] bottom-[2%] bg-slate-50 dark:bg-slate-800 border-4 border-black dark:border-slate-600 p-2 pb-8 shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] dark:shadow-[10px_10px_0px_0px_rgba(2,6,23,1)] transform -rotate-6 group-hover:-rotate-14 group-hover:-translate-x-12 group-hover:translate-y-6 transition-all duration-500 ease-out z-40 outline outline-1 outline-transparent"
+                    aria-hidden="true"
+                  >
+                    <div className="w-full aspect-[3/2] overflow-hidden border-2 border-black dark:border-slate-600 bg-slate-100 dark:bg-slate-900">
+                      <img
+                        src={PROJECT_CONTENT.photography.images[0]}
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
 
                   {/* Photo 5: Front Right (IMG2 - Square-ish 2000x2170) */}
-                  <img 
-                    src={PROJECT_CONTENT.photography.images[1]} 
-                    alt="Gallery Preview 5"
-                    loading="lazy" decoding="async"
-                    className="absolute w-[38%] md:w-[35%] aspect-[2000/2170] object-cover right-[12%] bottom-[0%] border-4 border-black dark:border-slate-600 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(2,6,23,1)] transform rotate-6 group-hover:rotate-12 group-hover:translate-x-8 group-hover:translate-y-6 group-hover:scale-105 transition-all duration-500 ease-out z-40 outline outline-1 outline-transparent bg-slate-200"
-                  />
+                  <div
+                    className="absolute w-[34%] md:w-[32%] right-[6%] bottom-[-1%] bg-slate-50 dark:bg-slate-800 border-4 border-black dark:border-slate-600 p-2 pb-8 shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] dark:shadow-[10px_10px_0px_0px_rgba(2,6,23,1)] transform rotate-6 group-hover:rotate-14 group-hover:translate-x-12 group-hover:translate-y-8 group-hover:scale-[1.08] transition-all duration-500 ease-out z-50 outline outline-1 outline-transparent"
+                    aria-hidden="true"
+                  >
+                    <div className="w-full aspect-[2000/2170] overflow-hidden border-2 border-black dark:border-slate-600 bg-slate-100 dark:bg-slate-900">
+                      <img
+                        src={PROJECT_CONTENT.photography.images[1]}
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
                 </button>
 
                 <button 
