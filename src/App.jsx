@@ -251,7 +251,7 @@ export default function App() {
       )}
 
       {/* PERSISTENT NAV */}
-      <nav className="fixed top-0 w-full bg-white/80 dark:bg-slate-900/90 backdrop-blur-md z-50 border-b-4 border-black dark:border-slate-600">
+      <nav className="fixed top-0 w-full bg-white/80 dark:bg-slate-900/90 backdrop-blur-md z-[60] border-b-4 border-black dark:border-slate-600">
         <div className="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
           <span className="font-black text-3xl border-4 border-black dark:border-slate-600 px-4 py-1 transform -rotate-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-200 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(2,6,23,1)] outline outline-1 outline-transparent">LC</span>
           <div className="flex items-center gap-3">
