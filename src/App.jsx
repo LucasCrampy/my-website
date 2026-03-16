@@ -14,7 +14,8 @@ const ICON_MAP = {
   lightbulb: <Lightbulb size={32} />
 };
 
-function useScrollReveal() {
+function useScrollReveal(options = {}) {
+  const { rootMargin = '0px', threshold = 0.2 } = options;
   const ref = useRef(null);
   useEffect(() => {
     const el = ref.current;
@@ -32,11 +33,11 @@ function useScrollReveal() {
           }
         }
       },
-      { threshold: 0.2 }
+      { rootMargin, threshold }
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [rootMargin, threshold]);
   return ref;
 }
 
@@ -54,8 +55,16 @@ export default function App() {
   const bioSectionRef = useRef(/** @type {HTMLElement | null} */ (null));
   const educationRevealRef = useScrollReveal();
   const projectsRevealRef = useScrollReveal();
-  const aboutRevealRef = useScrollReveal();
   const experienceRevealRef = useScrollReveal();
+  const bioSectionRevealRef = useScrollReveal();
+  const educationSectionRevealRef = useScrollReveal();
+  const workSectionRevealRef = useScrollReveal();
+  const projectRevealOpts = { rootMargin: '120px 0px 0px 0px', threshold: 0 };
+  const projectMathRevealRef = useScrollReveal(projectRevealOpts);
+  const projectComputersRevealRef = useScrollReveal(projectRevealOpts);
+  const projectScienceRevealRef = useScrollReveal(projectRevealOpts);
+  const projectPhotographyRevealRef = useScrollReveal(projectRevealOpts);
+  const projectFutureRevealRef = useScrollReveal(projectRevealOpts);
 
   useEffect(() => {
     if (activeProject || lightboxImage || reflectionOpen) {
@@ -309,9 +318,78 @@ export default function App() {
             </p>
           </div>
 
-          <a href="#education" aria-label="Scroll to education section" className="animate-bounce text-black dark:text-slate-400 mt-16 focus:outline-none focus-visible:ring-4 focus-visible:ring-yellow-400 rounded-full">
+          <a href="#bio" aria-label="Scroll to about section" className="animate-bounce text-black dark:text-slate-400 mt-16 focus:outline-none focus-visible:ring-4 focus-visible:ring-yellow-400 rounded-full">
             <ChevronDown size={56} strokeWidth={4} />
           </a>
+        </section>
+
+        {/* BIO SECTION */}
+        <section id="bio" ref={bioSectionRef} className="py-24 border-t-8 border-black dark:border-slate-700">
+          <div ref={bioSectionRevealRef} className="section-reveal reveal-on-scroll">
+            <h3 className="text-5xl font-black uppercase mb-12 tracking-tighter text-slate-900 dark:text-slate-200 [font-family:var(--font-blocky)]">About Me</h3>
+            <div className="bg-white dark:bg-slate-800 border-4 border-black dark:border-slate-600 p-8 md:p-12 shadow-[16px_16px_0px_0px_rgba(0,0,0,1)] dark:shadow-[16px_16px_0px_0px_rgba(2,6,23,1)]">
+              <div className="flex flex-col md:flex-row gap-12 items-center md:items-start">
+                <div className="w-full md:w-1/3 relative overflow-visible">
+                  <div className="bio-photo-frame w-full aspect-square relative overflow-hidden border-4 border-black dark:border-slate-600 outline outline-1 outline-transparent">
+                    <div className="absolute inset-0 bg-[#bfdbfe]" aria-hidden="true">
+                      <div
+                        className="absolute -top-[50%] left-1/2 h-[700%] w-[220%] bio-binary-pattern"
+                        style={{ transform: `translate(-50%, ${bioParallax * 80}px)` }}
+                      />
+                    </div>
+                    <img
+                      src={SITE_CONTENT.bio.image}
+                      alt="Lucas Profile"
+                      loading="lazy"
+                      decoding="async"
+                      className="absolute inset-0 z-10 w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+                <div className="w-full md:w-2/3 flex flex-col justify-between h-full space-y-8">
+                  <div>
+                    <h4 className="text-4xl font-black uppercase text-slate-900 dark:text-slate-200 mb-6 [font-family:var(--font-blocky)]">{SITE_CONTENT.bio.title}</h4>
+                    <p className="text-xl font-bold text-slate-700 dark:text-slate-400 leading-relaxed">
+                      {SITE_CONTENT.bio.text}
+                    </p>
+                    
+                    {/* Your primary links */}
+                    <div className="flex flex-wrap gap-4 pt-8">
+                      <a href={SITE_CONTENT.bio.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-blue-500 dark:bg-blue-600 text-white px-8 py-4 font-black uppercase tracking-widest border-4 border-black dark:border-slate-600 hover:bg-blue-600 dark:hover:bg-blue-500 transition-colors shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(2,6,23,1)] hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[10px_10px_0px_0px_rgba(2,6,23,1)] hover:-translate-y-1 focus:outline-none focus-visible:ring-4 focus-visible:ring-black dark:focus-visible:ring-white">
+                        <Linkedin size={20} strokeWidth={3} /> LinkedIn
+                      </a>
+                      <a href={SITE_CONTENT.bio.github} target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-slate-900 dark:bg-slate-700 text-white px-8 py-4 font-black uppercase tracking-widest border-4 border-black dark:border-slate-600 hover:bg-slate-800 dark:hover:bg-slate-600 transition-colors shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(2,6,23,1)] hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[10px_10px_0px_0px_rgba(2,6,23,1)] hover:-translate-y-1 focus:outline-none focus-visible:ring-4 focus-visible:ring-yellow-400">
+                        <Github size={20} strokeWidth={3} /> GitHub
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Sister's Callout Box */}
+                  <div className="bg-yellow-100 dark:bg-slate-700 border-4 border-black dark:border-slate-600 p-6 mt-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(2,6,23,1)] transform rotate-1 outline outline-1 outline-transparent flex flex-col sm:flex-row items-center sm:items-start gap-6">
+                    <img 
+                      src={SITE_CONTENT.bio.sisterImage} 
+                      alt="Sister Profile" 
+                      loading="lazy"
+                      decoding="async"
+                      className="w-20 h-20 border-4 border-black dark:border-slate-600 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(2,6,23,1)] object-cover bg-white shrink-0" 
+                    />
+                    <div>
+                      <p className="font-bold text-lg text-slate-900 dark:text-slate-200 mb-4">{SITE_CONTENT.bio.sisterText}</p>
+                      <div className="flex gap-6">
+                        <a href={SITE_CONTENT.bio.sisterLinkedin} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-black uppercase text-blue-700 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300 transition-colors underline decoration-4 underline-offset-4 focus:outline-none focus-visible:ring-4 focus-visible:ring-black dark:focus-visible:ring-white rounded-sm">
+                          <Linkedin size={18} strokeWidth={3} /> LinkedIn
+                        </a>
+                        <a href={SITE_CONTENT.bio.sisterGithub} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-black uppercase text-slate-900 dark:text-slate-300 hover:text-slate-600 dark:hover:text-white transition-colors underline decoration-4 underline-offset-4 focus:outline-none focus-visible:ring-4 focus-visible:ring-black dark:focus-visible:ring-white rounded-sm">
+                          <Github size={18} strokeWidth={3} /> GitHub
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* EDUCATION SECTION */}
@@ -321,7 +399,7 @@ export default function App() {
             <h3 className="text-4xl font-black uppercase tracking-tighter [font-family:var(--font-blocky)]">My Education</h3>
           </div>
           
-          <div className="flex flex-col gap-8">
+          <div ref={educationSectionRevealRef} className="section-reveal reveal-on-scroll flex flex-col gap-8">
             
             {/* Bachelor's Transfer */}
             <div className={`${SITE_CONTENT.education.transfer.bgClass} border-4 border-black dark:border-slate-600 p-8 md:p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between ${SITE_CONTENT.education.transfer.shadowClass} transform -rotate-1 outline outline-1 outline-transparent`}>
@@ -402,6 +480,7 @@ export default function App() {
             
             {/* TABLE 1: MATHEMATICS */}
             <div className={`${PROJECT_CONTENT.math.color} border-4 border-black dark:border-slate-600 p-8 md:p-12 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:shadow-[12px_12px_0px_0px_rgba(2,6,23,1)]`}>
+              <div ref={projectMathRevealRef} className="section-reveal reveal-on-scroll">
               <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-10 border-b-4 border-black dark:border-slate-600 pb-8">
                 <div className="bg-white dark:bg-slate-900 p-4 border-4 border-black dark:border-slate-600 transform -rotate-3 shrink-0 outline outline-1 outline-transparent">
                   {ICON_MAP[PROJECT_CONTENT.math.icon]}
@@ -424,10 +503,12 @@ export default function App() {
                   </ProjectCard>
                 ))}
               </div>
+              </div>
             </div>
 
             {/* TABLE 2: COMPUTERS */}
             <div className={`${PROJECT_CONTENT.computers.color} border-4 border-black dark:border-slate-600 p-8 md:p-12 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:shadow-[12px_12px_0px_0px_rgba(2,6,23,1)]`}>
+              <div ref={projectComputersRevealRef} className="section-reveal reveal-on-scroll">
               <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-10 border-b-4 border-black dark:border-slate-600 pb-8">
                 <div className="bg-white dark:bg-slate-900 p-4 border-4 border-black dark:border-slate-600 transform rotate-2 shrink-0 outline outline-1 outline-transparent">
                   {ICON_MAP[PROJECT_CONTENT.computers.icon]}
@@ -458,10 +539,12 @@ export default function App() {
                   </ProjectCard>
                 ))}
               </div>
+              </div>
             </div>
 
             {/* TABLE 3: SCIENCE */}
             <div className={`${PROJECT_CONTENT.science.color} border-4 border-black dark:border-slate-600 p-8 md:p-12 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:shadow-[12px_12px_0px_0px_rgba(2,6,23,1)]`}>
+              <div ref={projectScienceRevealRef} className="section-reveal reveal-on-scroll">
             <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-10 border-b-4 border-black dark:border-slate-600 pb-8">
                 <div className="bg-white dark:bg-slate-900 p-4 border-4 border-black dark:border-slate-600 transform -rotate-2 shrink-0 outline outline-1 outline-transparent">
                   {ICON_MAP[PROJECT_CONTENT.science.icon]}
@@ -492,10 +575,12 @@ export default function App() {
                   </ProjectCard>
                 ))}
               </div>
+              </div>
             </div>
 
             {/* TABLE 4: PHOTOGRAPHY (5-Photo Spread) */}
             <div className={`${PROJECT_CONTENT.photography.color} border-4 border-black dark:border-slate-600 p-8 md:p-12 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:shadow-[12px_12px_0px_0px_rgba(2,6,23,1)]`}>
+              <div ref={projectPhotographyRevealRef} className="section-reveal reveal-on-scroll">
             <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-10 border-b-4 border-black dark:border-slate-600 pb-8">
                 <div className="bg-white dark:bg-slate-900 p-4 border-4 border-black dark:border-slate-600 transform rotate-3 shrink-0 outline outline-1 outline-transparent">
                   {ICON_MAP[PROJECT_CONTENT.photography.icon]}
@@ -602,11 +687,12 @@ export default function App() {
                   View Full Gallery <ArrowUpRight size={24} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </button>
               </div>
+              </div>
             </div>
 
             {/* TABLE 5: FUTURE PROJECTS (Accordion Collapse) */}
             <div className={`${PROJECT_CONTENT.futureProjects.color} border-4 border-black dark:border-slate-600 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:shadow-[12px_12px_0px_0px_rgba(2,6,23,1)] transition-all duration-300`}>
-              
+              <div ref={projectFutureRevealRef} className="section-reveal reveal-on-scroll">
               <button
                 onClick={() => setShowFuture(!showFuture)}
                 className="w-full p-6 md:p-8 flex flex-row items-center justify-between hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer text-left focus:outline-none focus-visible:ring-4 focus-visible:ring-yellow-400"
@@ -666,94 +752,30 @@ export default function App() {
                   )}
                 </div>
               )}
-            </div>
-
-          </div>
-        </section>
-
-        {/* BIO SECTION */}
-        <section id="bio" ref={bioSectionRef} className="py-24 border-t-8 border-black dark:border-slate-700">
-          <h3 ref={aboutRevealRef} className="reveal-on-scroll text-5xl font-black uppercase mb-12 tracking-tighter text-slate-900 dark:text-slate-200 [font-family:var(--font-blocky)]">About Me</h3>
-          <div className="bg-white dark:bg-slate-800 border-4 border-black dark:border-slate-600 p-8 md:p-12 shadow-[16px_16px_0px_0px_rgba(0,0,0,1)] dark:shadow-[16px_16px_0px_0px_rgba(2,6,23,1)]">
-            <div className="flex flex-col md:flex-row gap-12 items-center md:items-start">
-              <div className="w-full md:w-1/3 relative overflow-visible">
-                <div className="bio-photo-frame w-full aspect-square relative overflow-hidden border-4 border-black dark:border-slate-600 outline outline-1 outline-transparent">
-                  <div className="absolute inset-0 bg-[#bfdbfe]" aria-hidden="true">
-                    <div
-                      className="absolute -top-[50%] left-1/2 h-[700%] w-[220%] bio-binary-pattern"
-                      style={{ transform: `translate(-50%, ${bioParallax * 80}px)` }}
-                    />
-                  </div>
-                  <img
-                    src={SITE_CONTENT.bio.image}
-                    alt="Lucas Profile"
-                    loading="lazy"
-                    decoding="async"
-                    className="absolute inset-0 z-10 w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-              <div className="w-full md:w-2/3 flex flex-col justify-between h-full space-y-8">
-                <div>
-                  <h4 className="text-4xl font-black uppercase text-slate-900 dark:text-slate-200 mb-6 [font-family:var(--font-blocky)]">{SITE_CONTENT.bio.title}</h4>
-                  <p className="text-xl font-bold text-slate-700 dark:text-slate-400 leading-relaxed">
-                    {SITE_CONTENT.bio.text}
-                  </p>
-                  
-                  {/* Your primary links */}
-                  <div className="flex flex-wrap gap-4 pt-8">
-                    <a href={SITE_CONTENT.bio.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-blue-500 dark:bg-blue-600 text-white px-8 py-4 font-black uppercase tracking-widest border-4 border-black dark:border-slate-600 hover:bg-blue-600 dark:hover:bg-blue-500 transition-colors shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(2,6,23,1)] hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[10px_10px_0px_0px_rgba(2,6,23,1)] hover:-translate-y-1 focus:outline-none focus-visible:ring-4 focus-visible:ring-black dark:focus-visible:ring-white">
-                      <Linkedin size={20} strokeWidth={3} /> LinkedIn
-                    </a>
-                    <a href={SITE_CONTENT.bio.github} target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-slate-900 dark:bg-slate-700 text-white px-8 py-4 font-black uppercase tracking-widest border-4 border-black dark:border-slate-600 hover:bg-slate-800 dark:hover:bg-slate-600 transition-colors shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(2,6,23,1)] hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[10px_10px_0px_0px_rgba(2,6,23,1)] hover:-translate-y-1 focus:outline-none focus-visible:ring-4 focus-visible:ring-yellow-400">
-                      <Github size={20} strokeWidth={3} /> GitHub
-                    </a>
-                  </div>
-                </div>
-
-                {/* Sister's Callout Box */}
-                <div className="bg-yellow-100 dark:bg-slate-700 border-4 border-black dark:border-slate-600 p-6 mt-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(2,6,23,1)] transform rotate-1 outline outline-1 outline-transparent flex flex-col sm:flex-row items-center sm:items-start gap-6">
-                  <img 
-                    src={SITE_CONTENT.bio.sisterImage} 
-                    alt="Sister Profile" 
-                    loading="lazy"
-                    decoding="async"
-                    className="w-20 h-20 border-4 border-black dark:border-slate-600 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(2,6,23,1)] object-cover bg-white shrink-0" 
-                  />
-                  <div>
-                    <p className="font-bold text-lg text-slate-900 dark:text-slate-200 mb-4">{SITE_CONTENT.bio.sisterText}</p>
-                    <div className="flex gap-6">
-                      <a href={SITE_CONTENT.bio.sisterLinkedin} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-black uppercase text-blue-700 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300 transition-colors underline decoration-4 underline-offset-4 focus:outline-none focus-visible:ring-4 focus-visible:ring-black dark:focus-visible:ring-white rounded-sm">
-                        <Linkedin size={18} strokeWidth={3} /> LinkedIn
-                      </a>
-                      <a href={SITE_CONTENT.bio.sisterGithub} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-black uppercase text-slate-900 dark:text-slate-300 hover:text-slate-600 dark:hover:text-white transition-colors underline decoration-4 underline-offset-4 focus:outline-none focus-visible:ring-4 focus-visible:ring-black dark:focus-visible:ring-white rounded-sm">
-                        <Github size={18} strokeWidth={3} /> GitHub
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                
               </div>
             </div>
+
           </div>
         </section>
 
         {/* WORK EXPERIENCE SECTION */}
         <section id="work" className="py-24 border-t-8 border-black dark:border-slate-700 border-dotted">
           <h3 ref={experienceRevealRef} className="reveal-on-scroll text-5xl font-black uppercase mb-12 tracking-tighter text-slate-900 dark:text-slate-200 [font-family:var(--font-blocky)]">Experience</h3>
-          <div className="border-4 border-black dark:border-slate-600 bg-white dark:bg-slate-800 overflow-hidden shadow-[16px_16px_0px_0px_rgba(0,0,0,1)] dark:shadow-[16px_16px_0px_0px_rgba(2,6,23,1)]">
+          <div ref={workSectionRevealRef} className="section-reveal reveal-on-scroll border-4 border-black dark:border-slate-600 bg-white dark:bg-slate-800 overflow-hidden shadow-[16px_16px_0px_0px_rgba(0,0,0,1)] dark:shadow-[16px_16px_0px_0px_rgba(2,6,23,1)]">
             <table className="w-full text-left font-bold text-xl text-slate-900 dark:text-slate-200">
               <thead>
                 <tr className="bg-black dark:bg-slate-700 text-white border-b-4 border-black dark:border-slate-600">
                   <th className="p-8 font-black tracking-widest uppercase">ROLE</th>
+                  <th className="p-8 font-black tracking-widest uppercase">TAKEAWAY</th>
                   <th className="p-8 text-right font-black tracking-widest uppercase">YEAR</th>
                 </tr>
               </thead>
               <tbody className="divide-y-4 divide-black dark:divide-slate-600">
                 {SITE_CONTENT.experience.map((job, idx) => (
                   <tr key={idx} className="hover:bg-yellow-50 dark:hover:bg-slate-700/50 transition-colors">
-                    <td className="p-8">{job.role}</td>
-                    <td className="p-8 text-right font-black">{job.year}</td>
+                    <td className="p-8 align-top">{job.role}</td>
+                    <td className="p-8 font-semibold text-lg text-slate-700 dark:text-slate-300 align-top">{job.learned}</td>
+                    <td className="p-8 text-right font-black align-top">{job.year}</td>
                   </tr>
                 ))}
               </tbody>

@@ -30,7 +30,7 @@ export default function ProjectModalContent({ project, category, onImageClick })
         )}
         <div className="w-full h-[60vh] overflow-hidden border-4 border-black dark:border-slate-600 bg-slate-100 dark:bg-slate-900">
           <iframe
-            src={project.pdfLink}
+            src={`/${project.pdfLink}`}
             className="w-full h-full"
             title={`PDF Viewer for ${project.title}`}
           >

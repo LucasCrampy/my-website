@@ -44,8 +44,8 @@
 /* Scroll-in reveal for section headers */
 .reveal-on-scroll {
   opacity: 0;
-  translate: 0 8px;
-  transition: opacity 500ms ease-out, translate 500ms ease-out;
+  translate: 0 6px;
+  transition: opacity 320ms ease-out, translate 320ms ease-out;
 }
 .reveal-on-scroll--visible {
   opacity: 1;
@@ -53,6 +53,24 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .reveal-on-scroll {
+    opacity: 1;
+    translate: none;
+    transition: none;
+  }
+}
+
+/* Section-level scroll reveal (Option A: whole section content fades/slides in) */
+.section-reveal {
+  opacity: 0;
+  translate: 0 10px;
+  transition: opacity 320ms ease-out, translate 320ms ease-out;
+}
+.section-reveal.reveal-on-scroll--visible {
+  opacity: 1;
+  translate: 0 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .section-reveal {
     opacity: 1;
     translate: none;
     transition: none;

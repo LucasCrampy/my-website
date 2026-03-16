@@ -76,11 +76,31 @@ export const siteContent = {
     }
   },
   experience: [
-    { role: "Individual Caregiver", year: "2025 - Present" },
-    { role: "Carpentry Apprentice", year: "2025" },
-    { role: "Freelance IT Work", year: "2025" },
-    { role: "Mouse Magic Toys", year: "2024" },
-    { role: "Docs Marina Grill", year: "2023" }
+    {
+      role: "Individual Caregiver",
+      year: "2025 - Present",
+      learned: "I am learning how to be responsible for someone else and support their daily needs."
+    },
+    {
+      role: "Carpentry Apprentice",
+      year: "2025",
+      learned: "I learned how to work safely and efficiently with tools while contributing to real projects."
+    },
+    {
+      role: "Freelance IT Work",
+      year: "2025",
+      learned: "I learned how to communicate clearly in a small business and personal environment."
+    },
+    {
+      role: "Mouse Magic Toys",
+      year: "2024",
+      learned: "I learned how to organize and manage a retail store and communicate with customers."
+    },
+    {
+      role: "Docs Marina Grill",
+      year: "2023",
+      learned: "I learned how to work under pressure and as part of a team in a fast-paced environment."
+    }
   ]
 };
 
