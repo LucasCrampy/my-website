@@ -8,11 +8,6 @@
  */
 
 export const siteContent = {
-  reflection: {
-    enabled: true,
-    label: "Reflection",
-    pdfPath: "reflection.pdf"
-  },
   hero: {
     name: "LUCAS CRAMPTON",
     major: "APPLIED MATH",
